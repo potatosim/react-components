@@ -1,0 +1,14 @@
+.layoutWrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  overflow: hidden;
+}
+
+.topContentWrapper {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
