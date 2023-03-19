@@ -1,25 +1,21 @@
-import CardItem from 'components/CardItem/CardItem';
 import React, { Component } from 'react';
+
+import CardItem from 'components/CardItem/CardItem';
 import User from 'types/User';
+import axios from 'axios';
 import styles from './Cards.module.css';
 
 export default class Cards extends Component {
   state: { users: User[] } = { users: [] };
 
-  async fetchData() {
-    const response = await fetch('https://jsonplaceholder.typicode.com/users');
-    const data = (await response.json()) as User[];
+  async componentDidMount() {
+    const { data } = await axios.get<User[]>('https://jsonplaceholder.typicode.com/users');
     this.setState({ users: data });
   }
 
-  componentDidMount() {
-    this.fetchData();
-  }
-
   render() {
-    console.log(this.state.users);
     return (
-      <div className={styles.cardsWrapper}>
+      <div data-testid="card-list" className={styles.cardsWrapper}>
         {this.state.users.map((item) => {
           return (
             <CardItem

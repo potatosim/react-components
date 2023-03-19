@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import CardItem from 'components/CardItem/CardItem';
 
-describe('CarItem', () => {
+describe('CardItem', () => {
   const mockCardData = {
     name: 'Anna',
     email: 'test@test.test',
