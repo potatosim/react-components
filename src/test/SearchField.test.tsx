@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import SearchField from './SearchField';
+import SearchField from 'components/SearchField/SearchField';
 import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 

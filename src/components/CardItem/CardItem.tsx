@@ -5,8 +5,8 @@ import styles from './CardItem.module.css';
 export default class CardItem extends Component<User> {
   render() {
     return (
-      <div className={styles.cardWrapper}>
-        <h2>{this.props.name}</h2>
+      <div data-testid="card-item" className={styles.cardWrapper}>
+        <h2 data-testid="card-name">{this.props.name}</h2>
         <div className={styles.imageWrapper}>
           <img
             src={
@@ -14,8 +14,8 @@ export default class CardItem extends Component<User> {
             }
           />
         </div>
-        <p>{this.props.email}</p>
-        <p>{this.props.phone}</p>
+        <p data-testid="card-email">{this.props.email}</p>
+        <p data-testid="card-phone">{this.props.phone}</p>
         <a href={this.props.website}>{this.props.website}</a>
       </div>
     );
