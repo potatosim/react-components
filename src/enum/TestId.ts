@@ -13,4 +13,6 @@ export enum TestId {
   AboutPageLink = 'about-page-link',
   Layout = 'layout',
   Main = 'main',
+  ImageAbout = 'image-about',
+  TextAbout = 'text-about',
 }
