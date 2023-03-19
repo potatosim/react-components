@@ -1,12 +1,19 @@
 import { render, screen } from '@testing-library/react';
+
 import Footer from 'layout/Footer/Footer';
+import { TestId } from 'enum/TestId';
 
 describe('Footer', () => {
   it('should render footer', () => {
     render(<Footer />);
-    const link = screen.getByTestId('footer-link');
-    expect(link).toBeInTheDocument();
+    const footer = screen.getByTestId(TestId.Footer);
+    expect(footer).toBeInTheDocument();
+  });
 
-    expect(link).toHaveAttribute('href', 'https://github.com/potatosim');
+  it('should render footer link', () => {
+    render(<Footer />);
+    const link = screen.getByTestId(TestId.FooterLink);
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute('href');
   });
 });

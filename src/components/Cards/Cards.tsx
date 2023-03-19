@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import CardItem from 'components/CardItem/CardItem';
+import { TestId } from 'enum/TestId';
 import User from 'types/User';
 import axios from 'axios';
 import styles from './Cards.module.css';
@@ -15,7 +16,7 @@ export default class Cards extends Component {
 
   render() {
     return (
-      <div data-testid="card-list" className={styles.cardsWrapper}>
+      <div data-testid={TestId.CardList} className={styles.cardsWrapper}>
         {this.state.users.map((item) => {
           return (
             <CardItem

@@ -1,4 +1,6 @@
 import React, { ChangeEvent, Component } from 'react';
+
+import { TestId } from 'enum/TestId';
 import styles from './SearchField.module.css';
 
 interface ISearchFieldState {
@@ -39,7 +41,7 @@ export default class SearchField extends Component {
         placeholder="Enter some text"
         value={this.state.value}
         onChange={this.handleChange}
-        data-testid="search-field"
+        data-testid={TestId.SearchField}
       />
     );
   }

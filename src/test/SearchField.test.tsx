@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
 import SearchField from 'components/SearchField/SearchField';
+import { TestId } from 'enum/TestId';
 import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 
@@ -20,7 +21,7 @@ describe('SearchField', () => {
 
   it('input should work correctly', () => {
     render(<SearchField />);
-    const input = screen.getByTestId('search-field');
+    const input = screen.getByTestId(TestId.SearchField);
     act(() => {
       userEvent.type(input, SEARCH_FIELD_VALUE);
     });
@@ -29,7 +30,7 @@ describe('SearchField', () => {
 
   it('should save input value to local storage', () => {
     const { unmount } = render(<SearchField />);
-    const input = screen.getByTestId('search-field');
+    const input = screen.getByTestId(TestId.SearchField);
     act(() => {
       userEvent.type(input, SEARCH_FIELD_VALUE);
     });
@@ -40,13 +41,13 @@ describe('SearchField', () => {
   it('should set value from local storage', () => {
     localStorage.setItem(SEARCH_FIELD_KEY, SEARCH_FIELD_VALUE);
     render(<SearchField />);
-    const input = screen.getByTestId('search-field');
+    const input = screen.getByTestId(TestId.SearchField);
     expect(input).toHaveValue(SEARCH_FIELD_VALUE);
   });
 
   it('should save value before page reload', () => {
     render(<SearchField />);
-    const input = screen.getByTestId('search-field');
+    const input = screen.getByTestId(TestId.SearchField);
     act(() => {
       userEvent.type(input, SEARCH_FIELD_VALUE);
       window.dispatchEvent(new Event('beforeunload'));

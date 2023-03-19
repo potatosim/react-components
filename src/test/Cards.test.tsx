@@ -1,6 +1,8 @@
-import { render, screen } from '@testing-library/react';
-import Cards from 'components/Cards/Cards';
 import axios, { AxiosResponse } from 'axios';
+import { render, screen } from '@testing-library/react';
+
+import Cards from 'components/Cards/Cards';
+import { TestId } from 'enum/TestId';
 import { act } from 'react-dom/test-utils';
 
 jest.mock('axios');
@@ -37,7 +39,7 @@ describe('Cards', () => {
     await act(async () => {
       render(<Cards />);
     });
-    const cardList = screen.getByTestId('card-list');
+    const cardList = screen.getByTestId(TestId.CardList);
     expect(cardList).toBeInTheDocument();
   });
 
