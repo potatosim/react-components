@@ -1,0 +1,36 @@
+img {
+  width: 100%;
+}
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.notFoundText {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.imageWrapper {
+  max-width: 600px;
+}
+
+.link {
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 10px;
+  transition: 0.25s all ease-in-out;
+  background-color: #eef6b0;
+}
+
+.link:hover,
+.link:active {
+  background-color: rgb(77, 204, 232);
+}

@@ -1,0 +1,19 @@
+.input {
+  min-width: 400px;
+  min-height: 40px;
+  border-radius: 10px;
+  padding: 10px;
+  border-color: blueviolet;
+  color: blueviolet;
+  font-size: 1.5rem;
+  background-image: url('https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-5.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right;
+}
+
+.input::placeholder {
+  color: blueviolet;
+  font-size: 1.5rem;
+  font-style: italic;
+}
