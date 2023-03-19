@@ -6,7 +6,6 @@ interface ISearchFieldState {
 }
 
 export default class SearchField extends Component {
-  // TODO:Do I need props here?
   state: ISearchFieldState = { value: '' };
 
   handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -37,9 +36,10 @@ export default class SearchField extends Component {
     return (
       <input
         className={styles.input}
-        placeholder="Enter some word"
+        placeholder="Enter some text"
         value={this.state.value}
         onChange={this.handleChange}
+        data-testid="search-field"
       />
     );
   }
