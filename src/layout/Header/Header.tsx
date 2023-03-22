@@ -15,6 +15,10 @@ const pageNames: Record<AppRoutes, { name: PagesNames; linkTestId: TestId }> = {
     name: PagesNames.AboutUs,
     linkTestId: TestId.AboutPageLink,
   },
+  [AppRoutes.Form]: {
+    name: PagesNames.Form,
+    linkTestId: TestId.AboutPageLink,
+  },
 };
 
 export default class Header extends Component {
