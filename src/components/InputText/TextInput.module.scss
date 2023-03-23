@@ -35,7 +35,8 @@
       left: 0;
       transform: translate(17px, 9px);
       transition: all 0.25s ease-in-out;
-      z-index: 10;
+      z-index: 1;
+      pointer-events: none;
     }
   }
 }

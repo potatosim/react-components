@@ -3,6 +3,7 @@ import DateInput from 'components/DateInput/DateInput';
 import ErrorMessageWrapper from 'components/ErrorMessageWrapper/ErrorMessageWrapper';
 import FileInput from 'components/FileInput/FileInput';
 import TextInput from 'components/InputText/TextInput';
+import Modal from 'components/Modal/Modal';
 import RadioInput from 'components/RadioInput/RadioInput';
 import Select from 'components/Select/Select';
 import React, { Component, createRef } from 'react';
@@ -26,6 +27,7 @@ export default class Form extends Component<IFormProps> {
   state: {
     image: string;
     validation: FormValidationState;
+    isModalOpen: boolean;
   };
 
   constructor(props: IFormProps) {
@@ -60,6 +62,7 @@ export default class Form extends Component<IFormProps> {
           isValid: true,
         },
       },
+      isModalOpen: false,
     };
   }
 
@@ -98,6 +101,7 @@ export default class Form extends Component<IFormProps> {
             : this.maleRef.current.value,
           selected: this.selectRef.current.value,
         });
+        this.setState({ isModalOpen: true });
         this.formRef.current?.reset();
       }
     }
@@ -105,27 +109,33 @@ export default class Form extends Component<IFormProps> {
 
   render() {
     return (
-      <form ref={this.formRef} onSubmit={this.handleSubmit} className={styles.form}>
-        <ErrorMessageWrapper errorMessage={this.state.validation.isTextInputValid.message}>
-          <TextInput inputRef={this.textInput} label="Name" />
-        </ErrorMessageWrapper>
-        <ErrorMessageWrapper errorMessage={this.state.validation.isDateInputValid.message}>
-          <DateInput inputRef={this.dateInput} />
-        </ErrorMessageWrapper>
-        <ErrorMessageWrapper errorMessage={this.state.validation.isSelectValid.message}>
-          <Select selectRef={this.selectRef} />
-        </ErrorMessageWrapper>
-        <ErrorMessageWrapper errorMessage={this.state.validation.isCheckInputValid.message}>
-          <CheckBoxInput checkInput={this.checkInput} />
-        </ErrorMessageWrapper>
-        <ErrorMessageWrapper errorMessage={this.state.validation.isRadioInputValid.message}>
-          <RadioInput maleRef={this.maleRef} femaleRef={this.femaleRef} />
-        </ErrorMessageWrapper>
-        <ErrorMessageWrapper errorMessage={this.state.validation.isFileInputValid.message}>
-          <FileInput fileInput={this.fileInput} />
-        </ErrorMessageWrapper>
-        <button className={styles.button}>Submit</button>
-      </form>
+      <>
+        <form ref={this.formRef} onSubmit={this.handleSubmit} className={styles.form}>
+          <ErrorMessageWrapper errorMessage={this.state.validation.isTextInputValid.message}>
+            <TextInput inputRef={this.textInput} label="Name" />
+          </ErrorMessageWrapper>
+          <ErrorMessageWrapper errorMessage={this.state.validation.isDateInputValid.message}>
+            <DateInput inputRef={this.dateInput} />
+          </ErrorMessageWrapper>
+          <ErrorMessageWrapper errorMessage={this.state.validation.isSelectValid.message}>
+            <Select selectRef={this.selectRef} />
+          </ErrorMessageWrapper>
+          <ErrorMessageWrapper errorMessage={this.state.validation.isCheckInputValid.message}>
+            <CheckBoxInput checkInput={this.checkInput} />
+          </ErrorMessageWrapper>
+          <ErrorMessageWrapper errorMessage={this.state.validation.isRadioInputValid.message}>
+            <RadioInput maleRef={this.maleRef} femaleRef={this.femaleRef} />
+          </ErrorMessageWrapper>
+          <ErrorMessageWrapper errorMessage={this.state.validation.isFileInputValid.message}>
+            <FileInput fileInput={this.fileInput} />
+          </ErrorMessageWrapper>
+          <button className={styles.button}>Submit</button>
+        </form>
+        <Modal
+          isModalOpen={this.state.isModalOpen}
+          closeModal={() => this.setState({ isModalOpen: false })}
+        />
+      </>
     );
   }
 }
