@@ -4,7 +4,7 @@ import { AppRoutes } from 'enum/AppRoutes';
 import { NavLink } from 'react-router-dom';
 import { PagesNames } from 'enum/PagesNames';
 import { TestId } from 'enum/TestId';
-import styles from './Header.module.css';
+import styles from './Header.module.scss';
 
 const pageNames: Record<AppRoutes, { name: PagesNames; linkTestId: TestId }> = {
   [AppRoutes.Home]: {
@@ -29,6 +29,10 @@ export default class Header extends Component {
   handleRouteChange = (route: AppRoutes) => {
     this.setState({ currentRoute: route });
   };
+
+  componentDidMount() {
+    this.setState({ currentRoute: location.pathname });
+  }
 
   render() {
     return (

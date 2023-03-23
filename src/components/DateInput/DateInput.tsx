@@ -13,6 +13,7 @@ export default class DateInput extends Component<IDateInputProps> {
     const { inputRef } = this.props;
     return (
       <div className={styles.inputWrapper}>
+        <label>Birthday:</label>
         <input ref={inputRef} type="date" />
       </div>
     );

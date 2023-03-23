@@ -1,15 +1,17 @@
+@import '/src/styles/variables.scss';
+
 .header {
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(183, 137, 253);
+  background-color: $primaryColor;
 }
 
 .linksWrapper {
   display: flex;
   justify-content: space-between;
-  min-width: 300px;
+  min-width: 380px;
 }
 
 .link,
@@ -24,14 +26,14 @@
 }
 
 .link {
-  background-color: #27ef9b;
+  background-color: $secondaryColor;
 }
 
 .link:hover,
 .link:active {
-  background-color: rgb(77, 204, 232);
+  background-color: $activeColor;
 }
 
 .activeBtn {
-  background-color: rgb(77, 204, 232);
+  background-color: $activeColor;
 }

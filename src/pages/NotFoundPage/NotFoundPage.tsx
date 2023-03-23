@@ -1,7 +1,7 @@
 import { AppRoutes } from 'enum/AppRoutes';
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './NotFoundPage.module.css';
+import styles from './NotFoundPage.module.scss';
 
 export default class NotFoundPage extends Component {
   render() {

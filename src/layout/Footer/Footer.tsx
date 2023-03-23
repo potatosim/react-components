@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { TestId } from 'enum/TestId';
-import styles from './Footer.module.css';
+import styles from './Footer.module.scss';
 
 export default class Footer extends Component {
   render() {

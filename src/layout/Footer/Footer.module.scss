@@ -1,9 +1,11 @@
+@import 'src/styles/variables';
+
 .footer {
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(183, 137, 253);
+  background-color: $primaryColor;
 }
 
 .imageWrapper {

@@ -5,7 +5,7 @@ import Header from 'layout/Header/Header';
 import Main from 'layout/Main/Main';
 import { Outlet } from 'react-router-dom';
 import { TestId } from 'enum/TestId';
-import styles from './Layout.module.css';
+import styles from './Layout.module.scss';
 
 export default class Layout extends Component {
   render() {

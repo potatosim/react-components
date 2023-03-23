@@ -1,7 +1,7 @@
 import { TestId } from 'enum/TestId';
 import React, { Component } from 'react';
 import User from 'types/User';
-import styles from './CardItem.module.css';
+import styles from './CardItem.module.scss';
 
 export default class CardItem extends Component<User> {
   render() {

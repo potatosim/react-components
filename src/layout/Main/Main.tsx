@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import ComponentWithChildren from 'types/ComponentWithChildren';
 import { TestId } from 'enum/TestId';
-import styles from './Main.module.css';
+import styles from './Main.module.scss';
 
 export default class Main extends Component<ComponentWithChildren> {
   render() {

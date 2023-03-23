@@ -1,0 +1,15 @@
+.radioWrapper {
+  display: flex;
+  column-gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  width: 100%;
+  justify-content: space-between;
+
+  label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 0.5rem;
+  }
+}

@@ -4,7 +4,7 @@ import CardItem from 'components/CardItem/CardItem';
 import { TestId } from 'enum/TestId';
 import User from 'types/User';
 import axios from 'axios';
-import styles from './Cards.module.css';
+import styles from './Cards.module.scss';
 
 export default class Cards extends Component {
   state: { users: User[] } = { users: [] };

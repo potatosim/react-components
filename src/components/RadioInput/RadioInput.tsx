@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './RadioInput.module.scss';
 
 interface RadioInputProps {
   maleRef: React.RefObject<HTMLInputElement>;
@@ -12,7 +13,7 @@ export default class RadioInput extends Component<RadioInputProps> {
   render() {
     const { maleRef, femaleRef } = this.props;
     return (
-      <div>
+      <div className={styles.radioWrapper}>
         <label>
           <input name="radio" value="Male" ref={maleRef} type="radio" />
           Male

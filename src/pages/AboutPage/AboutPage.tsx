@@ -1,6 +1,6 @@
 import { TestId } from 'enum/TestId';
 import React, { Component } from 'react';
-import styles from './AboutPage.module.css';
+import styles from './AboutPage.module.scss';
 
 export default class AboutPage extends Component {
   render() {

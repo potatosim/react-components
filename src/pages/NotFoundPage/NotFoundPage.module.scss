@@ -1,3 +1,5 @@
+@import '/src/styles/variables.scss';
+
 img {
   width: 100%;
 }
@@ -32,5 +34,5 @@ img {
 
 .link:hover,
 .link:active {
-  background-color: rgb(77, 204, 232);
+  background-color: $activeColor;
 }

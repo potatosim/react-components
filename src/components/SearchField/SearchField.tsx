@@ -1,7 +1,7 @@
 import React, { ChangeEvent, Component } from 'react';
 
 import { TestId } from 'enum/TestId';
-import styles from './SearchField.module.css';
+import styles from './SearchField.module.scss';
 
 interface ISearchFieldState {
   value: string;
