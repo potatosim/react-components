@@ -1,3 +1,4 @@
+import { TestId } from 'enum/TestId';
 import React, { Component } from 'react';
 import styles from './FileInput.module.scss';
 
@@ -39,7 +40,13 @@ export default class FileInput extends Component<IFileInputProps> {
     return (
       <div className={styles.inputWrapper}>
         <label className={isFileUpload ? styles.uploadLabel : ''}>
-          <input ref={fileInput} type="file" onChange={this.handleChangeInput} accept="jpg" />
+          <input
+            data-testid={TestId.FormFileInput}
+            ref={fileInput}
+            type="file"
+            onChange={this.handleChangeInput}
+            accept="jpg"
+          />
           Upload Image
         </label>
       </div>

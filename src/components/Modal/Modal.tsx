@@ -1,3 +1,4 @@
+import { TestId } from 'enum/TestId';
 import React, { Component } from 'react';
 import styles from './Modal.module.scss';
 
@@ -20,13 +21,18 @@ export default class Modal extends Component<IModalProps> {
     return (
       <div onClick={closeModal} className={styles.modal}>
         <div
+          data-testid={TestId.ModalContent}
           onClick={(event: React.MouseEvent<HTMLDivElement>) => {
             event.stopPropagation();
           }}
           className={styles.modalContent}
         >
-          <h2>Your data were successfully submitted</h2>
-          <button className={styles.closeBtn} onClick={closeModal}>
+          <h2 data-testid={TestId.Modal}>Your data were successfully submitted</h2>
+          <button
+            data-testid={TestId.CloseModalBtn}
+            className={styles.closeBtn}
+            onClick={closeModal}
+          >
             Close
           </button>
         </div>

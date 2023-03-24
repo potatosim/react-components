@@ -1,3 +1,4 @@
+import { TestId } from 'enum/TestId';
 import React, { Component } from 'react';
 import styles from './CheckBoxInput.module.scss';
 
@@ -14,7 +15,8 @@ export default class CheckBoxInput extends Component<CheckBoxInputProps> {
     return (
       <div className={styles.inputWrapper}>
         <label>
-          <input ref={checkInput} type="checkbox" />I agree to post my info
+          <input data-testid={TestId.FormCheckbox} ref={checkInput} type="checkbox" />I agree to
+          post my info
         </label>
       </div>
     );

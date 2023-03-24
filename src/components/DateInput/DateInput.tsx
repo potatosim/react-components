@@ -1,3 +1,4 @@
+import { TestId } from 'enum/TestId';
 import React, { Component } from 'react';
 import styles from './DateInput.module.scss';
 
@@ -14,7 +15,7 @@ export default class DateInput extends Component<IDateInputProps> {
     return (
       <div className={styles.inputWrapper}>
         <label>Birthday:</label>
-        <input ref={inputRef} type="date" />
+        <input data-testid={TestId.FormDateInput} ref={inputRef} type="date" />
       </div>
     );
   }

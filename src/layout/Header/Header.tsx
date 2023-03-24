@@ -17,7 +17,7 @@ const pageNames: Record<AppRoutes, { name: PagesNames; linkTestId: TestId }> = {
   },
   [AppRoutes.Form]: {
     name: PagesNames.Form,
-    linkTestId: TestId.AboutPageLink,
+    linkTestId: TestId.FormPageLink,
   },
 };
 

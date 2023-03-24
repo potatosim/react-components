@@ -1,3 +1,4 @@
+import { TestId } from 'enum/TestId';
 import React, { Component } from 'react';
 import styles from './Select.module.scss';
 
@@ -13,7 +14,11 @@ export default class Select extends Component<ISelectProps> {
     const { selectRef } = this.props;
     return (
       <div className={styles.selectWrapper}>
-        <select defaultValue={'Select your country'} ref={selectRef}>
+        <select
+          data-testid={TestId.FormSelect}
+          defaultValue={'Select your country'}
+          ref={selectRef}
+        >
           <option value="Select your country" disabled>
             Select your country
           </option>

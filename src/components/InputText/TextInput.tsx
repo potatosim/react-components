@@ -1,3 +1,4 @@
+import { TestId } from 'enum/TestId';
 import React, { Component } from 'react';
 import styles from './TextInput.module.scss';
 
@@ -15,7 +16,7 @@ export default class TextInput extends Component<ITextInputProps> {
     const { inputRef, label } = this.props;
     return (
       <div className={styles.inputWrapper}>
-        <input ref={inputRef} type="text" placeholder={label} />
+        <input data-testid={TestId.FormTextInput} ref={inputRef} type="text" placeholder={label} />
         <label>{label}</label>
       </div>
     );

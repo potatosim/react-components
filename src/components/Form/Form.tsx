@@ -6,6 +6,7 @@ import TextInput from 'components/InputText/TextInput';
 import Modal from 'components/Modal/Modal';
 import RadioInput from 'components/RadioInput/RadioInput';
 import Select from 'components/Select/Select';
+import { TestId } from 'enum/TestId';
 import React, { Component, createRef } from 'react';
 import { IFormCard } from 'types/IFormCard';
 import { FormValidationState, validateForm } from 'utils/formValidation';
@@ -94,7 +95,7 @@ export default class Form extends Component<IFormProps> {
         this.props.addCard({
           birthday: this.dateInput.current.value,
           checkbox: this.checkInput.current.checked,
-          image: URL.createObjectURL(this.fileInput.current.files![0] || ''),
+          image: URL.createObjectURL(this.fileInput.current.files![0]),
           name: this.textInput.current.value,
           radio: this.femaleRef.current.checked
             ? this.femaleRef.current.value
@@ -105,6 +106,10 @@ export default class Form extends Component<IFormProps> {
         this.formRef.current?.reset();
       }
     }
+  };
+
+  handleClose = () => {
+    this.setState({ isModalOpen: false });
   };
 
   render() {
@@ -129,12 +134,11 @@ export default class Form extends Component<IFormProps> {
           <ErrorMessageWrapper errorMessage={this.state.validation.isFileInputValid.message}>
             <FileInput fileInput={this.fileInput} />
           </ErrorMessageWrapper>
-          <button className={styles.button}>Submit</button>
+          <button data-testid={TestId.FormBtn} className={styles.button}>
+            Submit
+          </button>
         </form>
-        <Modal
-          isModalOpen={this.state.isModalOpen}
-          closeModal={() => this.setState({ isModalOpen: false })}
-        />
+        <Modal isModalOpen={this.state.isModalOpen} closeModal={this.handleClose} />
       </>
     );
   }

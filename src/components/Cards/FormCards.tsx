@@ -1,17 +1,21 @@
 import FormCardItem from 'components/FormCardItem/FormCardItem';
 import React, { Component } from 'react';
 import { IFormCard } from 'types/IFormCard';
+import { uid } from 'uid';
 import styles from './Cards.module.scss';
 
 export default class FormCards extends Component<{ cards: IFormCard[] }> {
   constructor(props: { cards: IFormCard[] }) {
     super(props);
   }
+
   render() {
     const { cards } = this.props;
+
     if (!cards.length) {
       return null;
     }
+
     return (
       <div className={styles.cardsWrapper}>
         {cards.map((card) => (
@@ -22,7 +26,7 @@ export default class FormCards extends Component<{ cards: IFormCard[] }> {
             image={card.image}
             radio={card.radio}
             selected={card.selected}
-            key={card.image}
+            key={uid()}
           />
         ))}
       </div>

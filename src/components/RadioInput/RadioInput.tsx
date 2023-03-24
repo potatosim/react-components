@@ -1,3 +1,4 @@
+import { TestId } from 'enum/TestId';
 import React, { Component } from 'react';
 import styles from './RadioInput.module.scss';
 
@@ -15,7 +16,13 @@ export default class RadioInput extends Component<RadioInputProps> {
     return (
       <div className={styles.radioWrapper}>
         <label>
-          <input name="radio" value="Male" ref={maleRef} type="radio" />
+          <input
+            data-testid={TestId.FormRadioInput}
+            name="radio"
+            value="Male"
+            ref={maleRef}
+            type="radio"
+          />
           Male
         </label>
         <label>
