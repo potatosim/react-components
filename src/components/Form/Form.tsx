@@ -18,13 +18,21 @@ interface IFormProps {
 
 export default class Form extends Component<IFormProps> {
   formRef: React.RefObject<HTMLFormElement>;
+
   textInput: React.RefObject<HTMLInputElement>;
+
   dateInput: React.RefObject<HTMLInputElement>;
+
   checkInput: React.RefObject<HTMLInputElement>;
+
   maleRef: React.RefObject<HTMLInputElement>;
+
   femaleRef: React.RefObject<HTMLInputElement>;
+
   selectRef: React.RefObject<HTMLSelectElement>;
+
   fileInput: React.RefObject<HTMLInputElement>;
+
   state: {
     image: string;
     validation: FormValidationState;

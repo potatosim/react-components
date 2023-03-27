@@ -40,27 +40,25 @@ describe('Header', () => {
     expect(aboutLink).toBeInTheDocument();
   });
 
-  it('should change page name', () => {
+  it('should change page name', async () => {
     render(
       <MemoryRouter>
         <Header />
       </MemoryRouter>,
     );
-    const headerTitle = screen.getByTestId(TestId.HeaderTitle);
-    const homeLink = screen.getByTestId(TestId.HomePageLink);
-    const aboutLink = screen.getByTestId(TestId.AboutPageLink);
-    expect(headerTitle).toHaveTextContent(PagesNames.Home);
+
+    expect(screen.getByTestId(TestId.HeaderTitle)).toHaveTextContent(PagesNames.Home);
 
     act(() => {
-      userEvent.click(aboutLink);
+      userEvent.click(screen.getByTestId(TestId.AboutPageLink));
     });
 
-    expect(headerTitle).toHaveTextContent(PagesNames.AboutUs);
+    expect(screen.getByTestId(TestId.HeaderTitle)).toHaveTextContent(PagesNames.AboutUs);
 
     act(() => {
-      userEvent.click(homeLink);
+      userEvent.click(screen.getByTestId(TestId.HomePageLink));
     });
 
-    expect(headerTitle).toHaveTextContent(PagesNames.Home);
+    expect(screen.getByTestId(TestId.HeaderTitle)).toHaveTextContent(PagesNames.Home);
   });
 });

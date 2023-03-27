@@ -14,8 +14,7 @@
   min-width: 380px;
 }
 
-.link,
-.activeBtn {
+.link {
   text-decoration: none;
   font-size: 1.2rem;
   padding: 10px 20px;
@@ -23,17 +22,11 @@
   display: inline-block;
   border-radius: 10px;
   transition: 0.25s all ease-in-out;
-}
-
-.link {
   background-color: $secondaryColor;
+  cursor: pointer;
 }
 
 .link:hover,
 .link:active {
-  background-color: $activeColor;
-}
-
-.activeBtn {
   background-color: $activeColor;
 }

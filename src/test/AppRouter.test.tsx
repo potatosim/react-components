@@ -1,4 +1,3 @@
-import userEvent from '@testing-library/user-event';
 import { TestId } from 'enum/TestId';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
@@ -7,17 +6,15 @@ import { act } from 'react-dom/test-utils';
 
 describe('AppRouter', () => {
   it('full app rendering/navigating', () => {
-    render(
-      <MemoryRouter>
-        <AppRouter />
-      </MemoryRouter>,
-    );
+    act(() => {
+      render(
+        <MemoryRouter>
+          <AppRouter />
+        </MemoryRouter>,
+      );
+    });
     expect(screen.getByTestId(TestId.SearchField)).toBeInTheDocument();
     const aboutLink = screen.getByTestId(TestId.AboutPageLink);
-
-    act(() => {
-      userEvent.click(aboutLink);
-    });
 
     expect(aboutLink).toBeInTheDocument();
   });

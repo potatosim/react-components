@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import { FC } from 'react';
 
 import ComponentWithChildren from 'types/ComponentWithChildren';
 import { TestId } from 'enum/TestId';
 import styles from './Main.module.scss';
 
-export default class Main extends Component<ComponentWithChildren> {
-  render() {
-    return (
-      <main data-testid={TestId.Main} className={styles.main}>
-        {this.props.children}
-      </main>
-    );
-  }
-}
+const Main: FC<ComponentWithChildren> = ({ children }) => {
+  return (
+    <main data-testid={TestId.Main} className={styles.main}>
+      {children}
+    </main>
+  );
+};
+
+export default Main;

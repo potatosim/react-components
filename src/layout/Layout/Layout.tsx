@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Footer from 'layout/Footer/Footer';
 import Header from 'layout/Header/Header';
@@ -7,18 +7,18 @@ import { Outlet } from 'react-router-dom';
 import { TestId } from 'enum/TestId';
 import styles from './Layout.module.scss';
 
-export default class Layout extends Component {
-  render() {
-    return (
-      <div data-testid={TestId.Layout} className={styles.layoutWrapper}>
-        <div className={styles.topContentWrapper}>
-          <Header />
-          <Main>
-            <Outlet />
-          </Main>
-        </div>
-        <Footer />
+const Layout = () => {
+  return (
+    <div data-testid={TestId.Layout} className={styles.layoutWrapper}>
+      <div className={styles.topContentWrapper}>
+        <Header />
+        <Main>
+          <Outlet />
+        </Main>
       </div>
-    );
-  }
-}
+      <Footer />
+    </div>
+  );
+};
+
+export default Layout;

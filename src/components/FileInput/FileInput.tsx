@@ -15,7 +15,6 @@ export default class FileInput extends Component<IFileInputProps> {
   }
 
   handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('change');
     if (event.target.files?.length) {
       this.setState({ isFileUpload: true });
     } else {
