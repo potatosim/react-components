@@ -127,12 +127,7 @@ const Form: FC<IFormProps> = ({ addCard }) => {
             isFileUpload={isFileUpload}
             setIsFileUpload={setIsFileUpload}
             {...register('image', {
-              validate: (value) => {
-                if (!value.length) {
-                  return 'Please, upload an image';
-                }
-                return true;
-              },
+              required: 'Please, upload an image',
             })}
           />
         </ErrorMessageWrapper>

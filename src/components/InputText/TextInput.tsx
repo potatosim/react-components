@@ -22,13 +22,4 @@ const TextInput = React.forwardRef<HTMLInputElement, ITextInputProps>(({ label, 
   );
 });
 
-// const TextInput: FC<ITextInputProps> = ({ label }) => {
-//   return (
-//     <div className={styles.inputWrapper}>
-//       <input data-testid={TestId.FormTextInput} type="text" placeholder={label} />
-//       <label>{label}</label>
-//     </div>
-//   );
-// };
-
 export default TextInput;

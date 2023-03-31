@@ -18,7 +18,6 @@ const FormCards: FC<FormCardsProps> = ({ cards }) => {
         <FormCardItem
           name={card.name}
           birthday={card.birthday}
-          // checkbox={card.checkbox}
           image={card.image}
           radio={card.radio}
           selected={card.selected}
