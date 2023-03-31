@@ -1,23 +1,22 @@
 import Form from 'components/Form/Form';
 import FormCards from 'components/Cards/FormCards';
-import React, { Component } from 'react';
+import { useState } from 'react';
 import { IFormCard } from 'types/IFormCard';
 import styles from './FormPage.module.scss';
 import { TestId } from 'enum/TestId';
 
-export default class FormPage extends Component {
-  state: { cards: IFormCard[] } = { cards: [] };
+const FormPage = () => {
+  const [cards, setCards] = useState<IFormCard[]>([]);
 
-  handleAddCard = (card: IFormCard) => {
-    this.setState({ cards: [...this.state.cards, card] });
+  const handleAddCard = (card: IFormCard) => {
+    setCards([...cards, card]);
   };
+  return (
+    <div data-testid={TestId.FormPageWrapper} className={styles.pageWrapper}>
+      <Form addCard={handleAddCard} />
+      <FormCards cards={cards} />
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div data-testid={TestId.FormPageWrapper} className={styles.pageWrapper}>
-        <Form addCard={this.handleAddCard} />
-        <FormCards cards={this.state.cards} />
-      </div>
-    );
-  }
-}
+export default FormPage;

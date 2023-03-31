@@ -7,139 +7,137 @@ import Modal from 'components/Modal/Modal';
 import RadioInput from 'components/RadioInput/RadioInput';
 import Select from 'components/Select/Select';
 import { TestId } from 'enum/TestId';
-import React, { Component, createRef } from 'react';
+import { FC, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { IFormCard } from 'types/IFormCard';
-import { FormValidationState, validateForm } from 'utils/formValidation';
 import styles from './Form.module.scss';
 
 interface IFormProps {
   addCard: (card: IFormCard) => void;
 }
 
-export default class Form extends Component<IFormProps> {
-  formRef: React.RefObject<HTMLFormElement>;
-  textInput: React.RefObject<HTMLInputElement>;
-  dateInput: React.RefObject<HTMLInputElement>;
-  checkInput: React.RefObject<HTMLInputElement>;
-  maleRef: React.RefObject<HTMLInputElement>;
-  femaleRef: React.RefObject<HTMLInputElement>;
-  selectRef: React.RefObject<HTMLSelectElement>;
-  fileInput: React.RefObject<HTMLInputElement>;
-  state: {
-    image: string;
-    validation: FormValidationState;
-    isModalOpen: boolean;
-  };
-
-  constructor(props: IFormProps) {
-    super(props);
-    this.formRef = createRef();
-    this.textInput = createRef();
-    this.dateInput = createRef();
-    this.checkInput = createRef();
-    this.maleRef = createRef();
-    this.femaleRef = createRef();
-    this.selectRef = createRef();
-    this.fileInput = createRef();
-    this.state = {
-      image: '',
-      validation: {
-        isTextInputValid: {
-          isValid: true,
-        },
-        isDateInputValid: {
-          isValid: true,
-        },
-        isCheckInputValid: {
-          isValid: true,
-        },
-        isSelectValid: {
-          isValid: true,
-        },
-        isFileInputValid: {
-          isValid: true,
-        },
-        isRadioInputValid: {
-          isValid: true,
-        },
-      },
-      isModalOpen: false,
-    };
-  }
-
-  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (
-      this.formRef.current &&
-      this.textInput.current &&
-      this.dateInput.current &&
-      this.checkInput.current &&
-      this.maleRef.current &&
-      this.femaleRef.current &&
-      this.selectRef.current &&
-      this.fileInput.current
-    ) {
-      const isFormValid = validateForm({
-        checkInput: this.checkInput.current,
-        dateInput: this.dateInput.current,
-        fileInput: this.fileInput.current,
-        selectRef: this.selectRef.current,
-        textInput: this.textInput.current,
-        maleRef: this.maleRef.current,
-        femaleRef: this.femaleRef.current,
-      });
-      this.setState({ validation: isFormValid });
-      const isAllFieldsValid = Object.values(isFormValid).every(({ isValid }) => isValid === true);
-      if (isAllFieldsValid) {
-        this.props.addCard({
-          birthday: this.dateInput.current.value,
-          checkbox: this.checkInput.current.checked,
-          image: URL.createObjectURL(this.fileInput.current.files![0]),
-          name: this.textInput.current.value,
-          radio: this.femaleRef.current.checked
-            ? this.femaleRef.current.value
-            : this.maleRef.current.value,
-          selected: this.selectRef.current.value,
-        });
-        this.setState({ isModalOpen: true });
-        this.formRef.current?.reset();
-      }
-    }
-  };
-
-  handleClose = () => {
-    this.setState({ isModalOpen: false });
-  };
-
-  render() {
-    return (
-      <>
-        <form ref={this.formRef} onSubmit={this.handleSubmit} className={styles.form}>
-          <ErrorMessageWrapper errorMessage={this.state.validation.isTextInputValid.message}>
-            <TextInput inputRef={this.textInput} label="Name" />
-          </ErrorMessageWrapper>
-          <ErrorMessageWrapper errorMessage={this.state.validation.isDateInputValid.message}>
-            <DateInput inputRef={this.dateInput} />
-          </ErrorMessageWrapper>
-          <ErrorMessageWrapper errorMessage={this.state.validation.isSelectValid.message}>
-            <Select selectRef={this.selectRef} />
-          </ErrorMessageWrapper>
-          <ErrorMessageWrapper errorMessage={this.state.validation.isCheckInputValid.message}>
-            <CheckBoxInput checkInput={this.checkInput} />
-          </ErrorMessageWrapper>
-          <ErrorMessageWrapper errorMessage={this.state.validation.isRadioInputValid.message}>
-            <RadioInput maleRef={this.maleRef} femaleRef={this.femaleRef} />
-          </ErrorMessageWrapper>
-          <ErrorMessageWrapper errorMessage={this.state.validation.isFileInputValid.message}>
-            <FileInput fileInput={this.fileInput} />
-          </ErrorMessageWrapper>
-          <button data-testid={TestId.FormBtn} className={styles.button}>
-            Submit
-          </button>
-        </form>
-        <Modal isModalOpen={this.state.isModalOpen} closeModal={this.handleClose} />
-      </>
-    );
-  }
+interface IFormValues {
+  name: string;
+  date: string;
+  check: boolean;
+  sex: string;
+  country: string;
+  image: FileList;
 }
+
+const Form: FC<IFormProps> = ({ addCard }) => {
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<IFormValues>({ mode: 'onSubmit' });
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isFileUpload, setIsFileUpload] = useState<boolean>(false);
+
+  const handleClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const onSubmit: SubmitHandler<IFormValues> = () => {
+    const image = getValues('image');
+    addCard({
+      birthday: getValues('date'),
+      image: URL.createObjectURL(image[0]),
+      name: getValues('name'),
+      radio: getValues('sex'),
+      selected: getValues('country'),
+    });
+
+    setIsModalOpen(true);
+
+    setIsFileUpload(false);
+    reset();
+  };
+
+  return (
+    <>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <ErrorMessageWrapper errorMessage={errors.name && errors.name.message}>
+          <TextInput
+            label="Name"
+            {...register('name', {
+              minLength: {
+                value: 3,
+                message: 'Incorrect Length',
+              },
+              required: {
+                value: true,
+                message: 'This field is required',
+              },
+            })}
+          />
+        </ErrorMessageWrapper>
+        <ErrorMessageWrapper errorMessage={errors.date && errors.date.message}>
+          <DateInput
+            {...register('date', {
+              required: {
+                value: true,
+                message: 'This field is required',
+              },
+              validate: (date: string) => {
+                if (!(Date.now() > new Date(date).getTime())) {
+                  return 'Incorrect Date';
+                }
+                return true;
+              },
+            })}
+          />
+        </ErrorMessageWrapper>
+        <ErrorMessageWrapper errorMessage={errors.country && errors.country.message}>
+          <Select
+            {...register('country', {
+              validate: (country) => {
+                if (country === 'Select your country') {
+                  return 'Choose your country';
+                }
+                return true;
+              },
+            })}
+          />
+        </ErrorMessageWrapper>
+        <ErrorMessageWrapper errorMessage={errors.check && errors.check.message}>
+          <CheckBoxInput
+            {...register('check', {
+              required: {
+                value: true,
+                message: 'This field is required',
+              },
+            })}
+          />
+        </ErrorMessageWrapper>
+        <ErrorMessageWrapper errorMessage={errors.sex && errors.sex.message}>
+          <RadioInput
+            {...register('sex', {
+              required: {
+                value: true,
+                message: 'This field is required',
+              },
+            })}
+          />
+        </ErrorMessageWrapper>
+        <ErrorMessageWrapper errorMessage={errors.image && errors.image.message}>
+          <FileInput
+            isFileUpload={isFileUpload}
+            setIsFileUpload={setIsFileUpload}
+            {...register('image', {
+              required: 'Please, upload an image',
+            })}
+          />
+        </ErrorMessageWrapper>
+        <button data-testid={TestId.FormBtn} className={styles.button}>
+          Submit
+        </button>
+      </form>
+      <Modal isModalOpen={isModalOpen} closeModal={handleClose} />
+    </>
+  );
+};
+
+export default Form;

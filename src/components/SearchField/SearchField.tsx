@@ -1,48 +1,54 @@
-import React, { ChangeEvent, Component } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import { TestId } from 'enum/TestId';
 import styles from './SearchField.module.scss';
 
-interface ISearchFieldState {
-  value: string;
-}
+const SearchField = () => {
+  const [value, setValue] = useState<string>('');
 
-export default class SearchField extends Component {
-  state: ISearchFieldState = { value: '' };
+  const inputValue = useRef<string>('');
 
-  handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    this.setState({ value: event.target.value });
+  useEffect(() => {
+    setValueFromLocalStorage();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', saveValueToLocalStorage);
+
+    return () => {
+      saveValueToLocalStorage();
+      window.removeEventListener('beforeunload', saveValueToLocalStorage);
+    };
+  }, []);
+
+  useEffect(() => {
+    inputValue.current = value;
+  }, [value]);
+
+  const saveValueToLocalStorage = () => {
+    localStorage.setItem('searchValue', inputValue.current);
   };
 
-  beforeUnloadListener = () => {
-    this.setState({ value: this.state.value });
-    localStorage.setItem('searchValue', this.state.value);
+  const setValueFromLocalStorage = () => {
+    const valueFromStorage = localStorage.getItem('searchValue');
+    if (valueFromStorage) {
+      setValue(valueFromStorage);
+    }
   };
 
-  componentDidMount(): void {
-    window.addEventListener('beforeunload', this.beforeUnloadListener);
-    const inputValue = localStorage.getItem('searchValue');
-    if (inputValue) {
-      this.setState({ value: inputValue });
-    }
-  }
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
 
-  componentWillUnmount(): void {
-    window.removeEventListener('beforeunload', this.beforeUnloadListener);
-    if (this.state.value) {
-      localStorage.setItem('searchValue', this.state.value);
-    }
-  }
+  return (
+    <input
+      className={styles.input}
+      placeholder="Enter some text"
+      value={value}
+      onChange={handleChange}
+      data-testid={TestId.SearchField}
+    />
+  );
+};
 
-  render() {
-    return (
-      <input
-        className={styles.input}
-        placeholder="Enter some text"
-        value={this.state.value}
-        onChange={this.handleChange}
-        data-testid={TestId.SearchField}
-      />
-    );
-  }
-}
+export default SearchField;

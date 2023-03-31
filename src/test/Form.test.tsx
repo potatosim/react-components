@@ -32,6 +32,7 @@ describe('Form', () => {
       userEvent.selectOptions(select, 'Belarus');
       userEvent.click(radioInput);
       userEvent.upload(fileInput, file);
+      Object.defineProperty(fileInput, 'value', { value: 'test' });
 
       userEvent.click(formButton);
     });

@@ -32,4 +32,5 @@ export enum TestId {
   ModalContent = 'modal-content',
   ErrorMessage = 'error-message',
   CloseModalBtn = 'close-modal-btn',
+  NotFoundLink = 'not-found-link',
 }

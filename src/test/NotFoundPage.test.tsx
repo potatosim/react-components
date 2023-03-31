@@ -9,7 +9,7 @@ describe('NotFoundPage', () => {
         <NotFoundPage />
       </MemoryRouter>,
     );
-    const link = screen.getByText('Go back to Home');
-    expect(link).toBeInTheDocument();
+    const button = screen.getByText('Go back to Home');
+    expect(button).toBeInTheDocument();
   });
 });
