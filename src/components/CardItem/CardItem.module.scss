@@ -8,11 +8,13 @@
   padding: 20px;
   width: 260px;
   border-radius: 5px;
-  height: 400px;
+  height: 350px;
 }
 
 .imageWrapper {
   max-width: 150px;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 img {

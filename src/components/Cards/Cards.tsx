@@ -1,32 +1,27 @@
-import { useEffect, useState } from 'react';
+import { FC } from 'react';
 
 import CardItem from 'components/CardItem/CardItem';
 import { TestId } from 'enum/TestId';
-import User from 'types/User';
-import axios from 'axios';
 import styles from './Cards.module.scss';
+import { uid } from 'uid';
+import CharacterItem from 'types/CharacterItem';
 
-const Cards = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  useEffect(() => {
-    fetchData();
-  }, []);
+interface CadrsProps {
+  characters: CharacterItem[];
+}
 
-  const fetchData = async () => {
-    const { data } = await axios.get<User[]>('https://jsonplaceholder.typicode.com/users');
-    setUsers(data);
-  };
-
+const Cards: FC<CadrsProps> = ({ characters }) => {
   return (
     <div data-testid={TestId.CardList} className={styles.cardsWrapper}>
-      {users.map((item) => {
+      {characters.map((item) => {
         return (
           <CardItem
             name={item.name}
-            phone={item.phone}
-            email={item.email}
-            website={item.website}
-            key={item.name}
+            species={item.species}
+            gender={item.gender}
+            status={item.status}
+            image={item.image}
+            key={uid()}
           />
         );
       })}

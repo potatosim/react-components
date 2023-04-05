@@ -1,11 +1,15 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useRef } from 'react';
 
 import { TestId } from 'enum/TestId';
 import styles from './SearchField.module.scss';
 
-const SearchField = () => {
-  const [value, setValue] = useState<string>('');
+interface SearchFieldProps {
+  value: string;
+  setValue: (value: string) => void;
+  onClick: () => Promise<void>;
+}
 
+const SearchField: FC<SearchFieldProps> = ({ setValue, value, onClick }) => {
   const inputValue = useRef<string>('');
 
   useEffect(() => {
@@ -41,13 +45,16 @@ const SearchField = () => {
   };
 
   return (
-    <input
-      className={styles.input}
-      placeholder="Enter some text"
-      value={value}
-      onChange={handleChange}
-      data-testid={TestId.SearchField}
-    />
+    <div className={styles.inputWrapper}>
+      <input
+        className={styles.input}
+        placeholder="Enter character name"
+        value={value}
+        onChange={handleChange}
+        data-testid={TestId.SearchField}
+      />
+      <button onClick={onClick} title="Search" className={styles.button} />
+    </div>
   );
 };
 
