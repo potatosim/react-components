@@ -3,16 +3,18 @@ import { FC } from 'react';
 import styles from './CardItem.module.scss';
 import CharacterItem from 'types/CharacterItem';
 
-const CardItem: FC<CharacterItem> = ({ name, species, gender, status, image }) => {
+interface CardItemProps {
+  character: CharacterItem;
+  onClick: () => void;
+}
+
+const CardItem: FC<CardItemProps> = ({ character, onClick }) => {
   return (
-    <div data-testid={TestId.CardItem} className={styles.cardWrapper}>
-      <h2 data-testid={TestId.CardName}>{name}</h2>
+    <div onClick={onClick} data-testid={TestId.CardItem} className={styles.cardWrapper}>
+      <h2 data-testid={TestId.CardName}>{character.name}</h2>
       <div className={styles.imageWrapper}>
-        <img src={image} />
+        <img src={character.image} />
       </div>
-      <p data-testid={TestId.CardEmail}>Species: {species}</p>
-      <p data-testid={TestId.CardPhone}>Gender: {gender}</p>
-      <p>Status: {status}</p>
     </div>
   );
 };

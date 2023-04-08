@@ -17,16 +17,18 @@ export default class RickAndMortyApi {
     baseURL: process.env.REACT_APP_API_URL,
   });
 
-  static getCharacters = async () => {
-    const { data } = await this.instance.get<GetResponse>(RickAndMortyEndpoints.Character);
+  static getCharactersByName = async (name: string) => {
+    const { data } = await this.instance.get<GetResponse>(RickAndMortyEndpoints.Character, {
+      params: { name: name },
+    });
 
     return data;
   };
 
-  static getFilteredCharacters = async (name: string) => {
-    const { data } = await this.instance.get<GetResponse>(RickAndMortyEndpoints.Character, {
-      params: { name: name },
-    });
+  static getCharacter = async (id: number) => {
+    const { data } = await this.instance.get<CharacterItem>(
+      `${RickAndMortyEndpoints.Character}/${id}`,
+    );
 
     return data;
   };

@@ -11,6 +11,7 @@ import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { IFormCard } from 'types/IFormCard';
 import styles from './Form.module.scss';
+import { createPortal } from 'react-dom';
 
 interface IFormProps {
   addCard: (card: IFormCard) => void;
@@ -135,7 +136,13 @@ const Form: FC<IFormProps> = ({ addCard }) => {
           Submit
         </button>
       </form>
-      <Modal isModalOpen={isModalOpen} closeModal={handleClose} />
+      {!!isModalOpen &&
+        createPortal(
+          <Modal closeModal={handleClose} closeIcon={false}>
+            <h2 data-testid={TestId.Modal}>Your data were successfully submitted</h2>
+          </Modal>,
+          document.body,
+        )}
     </>
   );
 };
