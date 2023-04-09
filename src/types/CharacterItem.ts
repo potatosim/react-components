@@ -11,7 +11,7 @@ interface CharacterItem {
 
 interface CharacterOrigin {
   name: string;
-  url: string;
+  url?: string;
 }
 
 export default CharacterItem;

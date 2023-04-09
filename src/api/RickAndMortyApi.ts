@@ -13,21 +13,20 @@ interface GetResponse {
 }
 
 export default class RickAndMortyApi {
-  static instance = axios.create({
-    baseURL: process.env.REACT_APP_API_URL,
-  });
-
   static getCharactersByName = async (name: string) => {
-    const { data } = await this.instance.get<GetResponse>(RickAndMortyEndpoints.Character, {
-      params: { name: name },
-    });
+    const { data } = await axios.get<GetResponse>(
+      `${process.env.REACT_APP_API_URL}/${RickAndMortyEndpoints.Character}`,
+      {
+        params: { name: name },
+      },
+    );
 
     return data;
   };
 
   static getCharacter = async (id: number) => {
-    const { data } = await this.instance.get<CharacterItem>(
-      `${RickAndMortyEndpoints.Character}/${id}`,
+    const { data } = await axios.get<CharacterItem>(
+      `${process.env.REACT_APP_API_URL}/${RickAndMortyEndpoints.Character}/${id}`,
     );
 
     return data;

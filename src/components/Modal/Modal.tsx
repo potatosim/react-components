@@ -10,7 +10,7 @@ interface IModalProps extends PropsWithChildren {
 
 const Modal: FC<IModalProps> = ({ closeModal, children, closeIcon = true }) => {
   return (
-    <div onClick={closeModal} className={styles.modal}>
+    <div data-testid={TestId.ModalBackground} onClick={closeModal} className={styles.modal}>
       <div
         data-testid={TestId.ModalContent}
         onClick={(event: React.MouseEvent<HTMLDivElement>) => {

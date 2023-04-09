@@ -6,6 +6,7 @@ import RickAndMortyApi from 'api/RickAndMortyApi';
 import Loader from 'components/Loader/Loader';
 import { createPortal } from 'react-dom';
 import ErrorNotification from 'components/ErrorNotification/ErrorNotification';
+import { TestId } from 'enum/TestId';
 
 interface CardModalProps {
   onClose: () => void;
@@ -22,9 +23,9 @@ const CardModal: FC<CardModalProps> = ({ onClose, characterId }) => {
     return () => clearTimeout(id);
   }, [isError]);
 
-  const fetchById = async (id: number) => {
+  const fetchById = async () => {
     try {
-      const data = await RickAndMortyApi.getCharacter(id);
+      const data = await RickAndMortyApi.getCharacter(characterId);
       setCharacter(data);
     } catch (e) {
       setIsError(true);
@@ -32,7 +33,7 @@ const CardModal: FC<CardModalProps> = ({ onClose, characterId }) => {
   };
 
   useEffect(() => {
-    fetchById(characterId);
+    fetchById();
   }, []);
 
   if (!character) {
@@ -42,8 +43,8 @@ const CardModal: FC<CardModalProps> = ({ onClose, characterId }) => {
   return (
     <>
       <Modal closeModal={onClose}>
-        <h2>{character.name}</h2>
-        <p> Gender: {character.gender}</p>
+        <h2 data-testid={TestId.ModalName}>{character.name}</h2>
+        <p data-testid={TestId.ModalGender}> Gender: {character.gender}</p>
         <p> Species: {character.species}</p>
         <p> Status: {character.status}</p>
         <p> Origin: {character.origin.name}</p>

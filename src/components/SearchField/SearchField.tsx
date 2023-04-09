@@ -31,7 +31,13 @@ const SearchField: FC<SearchFieldProps> = ({ setValue, value, onClick, isError }
         }}
         data-testid={TestId.SearchField}
       />
-      <button disabled={isError} onClick={onClick} title="Search" className={styles.button} />
+      <button
+        data-testid={TestId.SearchFieldBtn}
+        disabled={isError}
+        onClick={onClick}
+        title="Search"
+        className={styles.button}
+      />
       {isError &&
         createPortal(
           <ErrorNotification

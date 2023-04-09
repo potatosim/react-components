@@ -1,8 +1,7 @@
 export enum TestId {
   CardItem = 'card-item',
   CardName = 'card-name',
-  CardEmail = 'card-email',
-  CardPhone = 'card-phone',
+  CardImage = 'card-image',
   CardList = 'card-list',
   SearchField = 'search-field',
   Footer = 'footer',
@@ -33,4 +32,9 @@ export enum TestId {
   ErrorMessage = 'error-message',
   CloseModalBtn = 'close-modal-btn',
   NotFoundLink = 'not-found-link',
+  ModalBackground = 'modal-background',
+  SearchFieldBtn = 'search-field-btn',
+  ModalName = 'modal-name',
+  ModalGender = 'modal-gender',
+  ErrorNotification = 'error-notification',
 }

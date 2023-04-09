@@ -13,7 +13,7 @@ const CardItem: FC<CardItemProps> = ({ character, onClick }) => {
     <div onClick={onClick} data-testid={TestId.CardItem} className={styles.cardWrapper}>
       <h2 data-testid={TestId.CardName}>{character.name}</h2>
       <div className={styles.imageWrapper}>
-        <img src={character.image} />
+        <img data-testid={TestId.CardImage} src={character.image} />
       </div>
     </div>
   );

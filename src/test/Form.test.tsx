@@ -37,12 +37,13 @@ describe('Form', () => {
       userEvent.click(formButton);
     });
 
-    const modalBtn = await screen.findByTestId(TestId.CloseModalBtn);
+    const modalText = await screen.findByTestId(TestId.Modal);
+    const modalBgc = await screen.findByTestId(TestId.ModalBackground);
 
     await act(async () => {
-      userEvent.click(modalBtn);
+      userEvent.click(modalBgc);
     });
 
-    expect(modalBtn).not.toBeInTheDocument();
+    expect(modalText).not.toBeInTheDocument();
   });
 });
