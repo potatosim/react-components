@@ -1,18 +1,16 @@
 import { TestId } from 'enum/TestId';
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import styles from './Modal.module.scss';
+import { CloseIcon } from 'static/icons';
 
-interface IModalProps {
+interface IModalProps extends PropsWithChildren {
   closeModal: () => void;
-  isModalOpen: boolean;
+  closeIcon?: boolean;
 }
 
-const Modal: FC<IModalProps> = ({ closeModal, isModalOpen }) => {
-  if (!isModalOpen) {
-    return null;
-  }
+const Modal: FC<IModalProps> = ({ closeModal, children, closeIcon = true }) => {
   return (
-    <div onClick={closeModal} className={styles.modal}>
+    <div data-testid={TestId.ModalBackground} onClick={closeModal} className={styles.modal}>
       <div
         data-testid={TestId.ModalContent}
         onClick={(event: React.MouseEvent<HTMLDivElement>) => {
@@ -20,10 +18,16 @@ const Modal: FC<IModalProps> = ({ closeModal, isModalOpen }) => {
         }}
         className={styles.modalContent}
       >
-        <h2 data-testid={TestId.Modal}>Your data were successfully submitted</h2>
-        <button data-testid={TestId.CloseModalBtn} className={styles.closeBtn} onClick={closeModal}>
-          Close
-        </button>
+        {closeIcon && (
+          <button
+            data-testid={TestId.CloseModalBtn}
+            className={styles.closeBtn}
+            onClick={closeModal}
+          >
+            <CloseIcon />
+          </button>
+        )}
+        {children}
       </div>
     </div>
   );

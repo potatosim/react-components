@@ -1,22 +1,20 @@
 import { TestId } from 'enum/TestId';
 import { FC } from 'react';
-import User from 'types/User';
 import styles from './CardItem.module.scss';
+import CharacterItem from 'types/CharacterItem';
 
-const CardItem: FC<User> = ({ email, name, phone, website }) => {
+interface CardItemProps {
+  character: CharacterItem;
+  onClick: () => void;
+}
+
+const CardItem: FC<CardItemProps> = ({ character, onClick }) => {
   return (
-    <div data-testid={TestId.CardItem} className={styles.cardWrapper}>
-      <h2 data-testid={TestId.CardName}>{name}</h2>
+    <div onClick={onClick} data-testid={TestId.CardItem} className={styles.cardWrapper}>
+      <h2 data-testid={TestId.CardName}>{character.name}</h2>
       <div className={styles.imageWrapper}>
-        <img
-          src={
-            'https://previews.123rf.com/images/luplupme/luplupme1606/luplupme160600130/57972837-anonymous-man-face-and-anonymous-face-man-with-hidden-face-vector-illustration-anonymous-face.jpg'
-          }
-        />
+        <img data-testid={TestId.CardImage} src={character.image} />
       </div>
-      <p data-testid={TestId.CardEmail}>{email}</p>
-      <p data-testid={TestId.CardPhone}>{phone}</p>
-      <a href={website}>{website}</a>
     </div>
   );
 };

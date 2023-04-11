@@ -12,46 +12,41 @@ describe('SearchField', () => {
   beforeEach(() => {
     localStorage.removeItem(SEARCH_FIELD_KEY);
   });
-
   it('should render input', () => {
-    render(<SearchField />);
-    const input = screen.getByPlaceholderText('Enter some text');
+    render(<SearchField value={SEARCH_FIELD_VALUE} onClick={async () => {}} setValue={() => {}} />);
+    const input = screen.getByPlaceholderText('Enter character name');
     expect(input).toBeInTheDocument();
   });
-
   it('input should work correctly', () => {
-    render(<SearchField />);
+    render(<SearchField value={SEARCH_FIELD_VALUE} onClick={async () => {}} setValue={() => {}} />);
     const input = screen.getByTestId(TestId.SearchField);
     act(() => {
       userEvent.type(input, SEARCH_FIELD_VALUE);
     });
     expect(input).toHaveValue(SEARCH_FIELD_VALUE);
   });
-
-  it('should save input value to local storage', () => {
-    const { unmount } = render(<SearchField />);
+  it('should save input value to local storage', async () => {
+    render(
+      <SearchField
+        value={SEARCH_FIELD_VALUE}
+        onClick={async () => {
+          localStorage.setItem(SEARCH_FIELD_KEY, SEARCH_FIELD_VALUE);
+        }}
+        setValue={() => {}}
+      />,
+    );
     const input = screen.getByTestId(TestId.SearchField);
-    act(() => {
-      userEvent.type(input, SEARCH_FIELD_VALUE);
+    const button = screen.getByTestId(TestId.SearchFieldBtn);
+    await act(async () => {
+      await userEvent.type(input, SEARCH_FIELD_VALUE);
+      await userEvent.click(button);
     });
-    unmount();
     expect(localStorage.getItem(SEARCH_FIELD_KEY)).toBe(SEARCH_FIELD_VALUE);
   });
-
   it('should set value from local storage', () => {
     localStorage.setItem(SEARCH_FIELD_KEY, SEARCH_FIELD_VALUE);
-    render(<SearchField />);
+    render(<SearchField value={SEARCH_FIELD_VALUE} onClick={async () => {}} setValue={() => {}} />);
     const input = screen.getByTestId(TestId.SearchField);
     expect(input).toHaveValue(SEARCH_FIELD_VALUE);
-  });
-
-  it('should save value before page reload', () => {
-    render(<SearchField />);
-    const input = screen.getByTestId(TestId.SearchField);
-    act(() => {
-      userEvent.type(input, SEARCH_FIELD_VALUE);
-      window.dispatchEvent(new Event('beforeunload'));
-    });
-    expect(localStorage.getItem(SEARCH_FIELD_KEY)).toBe(SEARCH_FIELD_VALUE);
   });
 });

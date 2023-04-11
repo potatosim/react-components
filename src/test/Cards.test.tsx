@@ -1,43 +1,51 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { render, screen } from '@testing-library/react';
 
 import Cards from 'components/Cards/Cards';
 import { TestId } from 'enum/TestId';
 import { act } from 'react-dom/test-utils';
 
-jest.mock('axios');
 describe('Cards', () => {
   const response: Partial<AxiosResponse> = {
     data: [
       {
-        name: 'Leanne Graham',
-        email: 'Sincere@april.biz',
-        phone: '1-770-736-8031 x56442',
-        website: 'hildegard.org',
+        name: 'Hanna',
+        species: 'Human',
+        gender: 'Unknown',
+        status: 'Awake and alive',
+        image:
+          'https://avatars.mds.yandex.net/i?id=6a5252daff56ea0d87522bc0ee6b2257-4429068-images-thumbs&n=13',
+        id: 1,
+        origin: { name: 'HZ' },
+        location: { name: 'Planet' },
       },
       {
-        name: 'Ervin Howell',
-        email: 'Shanna@melissa.tv',
-        phone: '010-692-6593 x09125',
-        website: 'anastasia.net',
+        name: 'Dan',
+        species: 'Human',
+        gender: 'Horse',
+        status: 'Alive',
+        image:
+          'https://www.shutterstock.com/image-vector/dirty-dan-logo-text-design-260nw-2045229281.jpg',
+        id: 2,
+        origin: { name: 'Something' },
+        location: { name: 'Location' },
       },
       {
-        name: 'Clementine Bauch',
-        email: 'Nathan@yesenia.net',
-        phone: '1-463-123-4447',
-        website: 'ramiro.info',
+        name: 'Marin',
+        species: 'Human',
+        gender: 'Girl',
+        status: 'Alive',
+        image: 'https://image.lexica.art/full_jpg/d5fd3e1c-f23b-497c-a440-19c747604e0c',
+        id: 3,
+        origin: { name: 'Something' },
+        location: { name: 'Location' },
       },
     ],
   };
-  const mockedAxios = axios as jest.Mocked<typeof axios>;
-
-  beforeEach(() => {
-    mockedAxios.get.mockResolvedValue(response);
-  });
 
   it('should render card-item', async () => {
     await act(async () => {
-      render(<Cards />);
+      render(<Cards characters={response.data} />);
     });
     const cardList = screen.getByTestId(TestId.CardList);
     expect(cardList).toBeInTheDocument();
@@ -45,7 +53,7 @@ describe('Cards', () => {
 
   it('should render user cards', async () => {
     await act(async () => {
-      render(<Cards />);
+      render(<Cards characters={response.data} />);
     });
     const cards = await screen.findAllByTestId('card-item');
     expect(cards.length).toBe(response.data.length);

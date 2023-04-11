@@ -1,35 +1,34 @@
-import { useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 
 import CardItem from 'components/CardItem/CardItem';
 import { TestId } from 'enum/TestId';
-import User from 'types/User';
-import axios from 'axios';
 import styles from './Cards.module.scss';
+import { uid } from 'uid';
+import CharacterItem from 'types/CharacterItem';
+import { createPortal } from 'react-dom';
+import CardModal from 'components/CardModal/CardModal';
 
-const Cards = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  useEffect(() => {
-    fetchData();
-  }, []);
+interface CadrsProps {
+  characters: CharacterItem[];
+}
 
-  const fetchData = async () => {
-    const { data } = await axios.get<User[]>('https://jsonplaceholder.typicode.com/users');
-    setUsers(data);
+const Cards: FC<CadrsProps> = ({ characters }) => {
+  const [characterId, setCharacterId] = useState<number | null>(null);
+
+  const handleCloseModal = () => {
+    setCharacterId(null);
   };
 
   return (
     <div data-testid={TestId.CardList} className={styles.cardsWrapper}>
-      {users.map((item) => {
-        return (
-          <CardItem
-            name={item.name}
-            phone={item.phone}
-            email={item.email}
-            website={item.website}
-            key={item.name}
-          />
-        );
+      {characters.map((item) => {
+        return <CardItem onClick={() => setCharacterId(item.id)} character={item} key={uid()} />;
       })}
+      {!!characterId &&
+        createPortal(
+          <CardModal characterId={characterId} onClose={handleCloseModal} />,
+          document.body,
+        )}
     </div>
   );
 };
