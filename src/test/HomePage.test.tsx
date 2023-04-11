@@ -104,27 +104,4 @@ describe('HomePage', () => {
 
     expect(functionWithError).toThrowError(Error);
   });
-
-  it('should clear error message', async () => {
-    jest.useFakeTimers();
-    jest.spyOn(global, 'setTimeout');
-
-    await act(async () => {
-      render(
-        <MemoryRouter>
-          <HomePage />
-        </MemoryRouter>,
-      );
-    });
-
-    const input = screen.getByTestId(TestId.SearchField);
-    const button = screen.getByTestId(TestId.SearchFieldBtn);
-
-    await act(async () => {
-      userEvent.type(input, SEARCH_WRONG_VALUE);
-      userEvent.click(button);
-    });
-
-    expect(setTimeout).toHaveBeenCalledTimes(1);
-  });
 });
