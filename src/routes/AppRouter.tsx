@@ -1,11 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
-
-import AboutPage from 'pages/AboutPage/AboutPage';
 import { AppRoutes } from 'enum/AppRoutes';
-import Layout from 'layout/Layout/Layout';
-import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
-import HomePage from 'pages/HomePage/HomePage';
-import FormPage from 'pages/FormPage/FormPage';
+import AboutPage from 'pages/AboutPage';
+import NotFoundPage from 'pages/NotFoundPage';
+import HomePage from 'pages/HomePage';
+import FormPage from 'pages/FormPage';
+import Layout from 'layout/Layout';
 
 const AppRouter = () => {
   return (

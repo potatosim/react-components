@@ -1,10 +1,11 @@
-import { AppRoutes } from 'enum/AppRoutes';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { uid } from 'uid';
+import { AppRoutes } from 'enum/AppRoutes';
 import { PagesNames } from 'enum/PagesNames';
 import { TestId } from 'enum/TestId';
+
 import styles from './Header.module.scss';
-import { uid } from 'uid';
-import { useEffect, useState } from 'react';
 
 const pageNames: Record<AppRoutes, { name: PagesNames; linkTestId: TestId }> = {
   [AppRoutes.Home]: {

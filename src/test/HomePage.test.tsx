@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
+import { act } from 'react-dom/test-utils';
 import axios, { AxiosResponse } from 'axios';
 import { TestId } from 'enum/TestId';
-import HomePage from 'pages/HomePage/HomePage';
-import { act } from 'react-dom/test-utils';
-import { MemoryRouter } from 'react-router-dom';
+import HomePage from 'pages/HomePage';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;

@@ -1,10 +1,10 @@
 import React from 'react';
-
-import Footer from 'layout/Footer/Footer';
-import Header from 'layout/Header/Header';
-import Main from 'layout/Main/Main';
 import { Outlet } from 'react-router-dom';
+import Footer from 'layout/Footer';
+import Header from 'layout/Header';
+import Main from 'layout/Main';
 import { TestId } from 'enum/TestId';
+
 import styles from './Layout.module.scss';
 
 const Layout = () => {

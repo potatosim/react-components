@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import Main from 'layout/Main/Main';
+import Main from 'layout/Main';
 import { TestId } from 'enum/TestId';
 
 describe('Main', () => {

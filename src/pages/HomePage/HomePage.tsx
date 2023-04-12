@@ -1,52 +1,31 @@
-import Cards from 'components/Cards/Cards';
-import SearchField from 'components/SearchField/SearchField';
+import { FC, useEffect } from 'react';
+import { useAppSelector } from 'hooks/reduxHooks';
+import { useLazyGetCharactersByNameQuery } from 'services/charactersApi';
+import Cards from 'components/Cards';
+import SearchField from 'components/SearchField';
+import Loader from 'components/Loader';
+import Portal from 'components/Portal';
+
 import styles from './HomePage.module.scss';
-import { useLayoutEffect, useState } from 'react';
-import CharacterItem from 'types/CharacterItem';
-import RickAndMortyApi from 'api/RickAndMortyApi';
-import { createPortal } from 'react-dom';
-import Loader from 'components/Loader/Loader';
 
-const HomePage = () => {
-  const [characters, setCharacters] = useState<CharacterItem[]>([]);
-  const [searchFieldValue, setSearchFieldValue] = useState<string>('');
-  const [isError, setIsError] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+const HomePage: FC = () => {
+  const { searchValue } = useAppSelector((state) => state.search);
+  const [load, { data, isFetching, isError }] = useLazyGetCharactersByNameQuery();
 
-  useLayoutEffect(() => {
-    const valueFromStorage = localStorage.getItem('searchValue') || '';
-    setSearchFieldValue(valueFromStorage);
-    fetchByName(valueFromStorage);
+  useEffect(() => {
+    load(searchValue);
   }, []);
 
-  const fetchByName = async (name: string) => {
-    try {
-      localStorage.setItem('searchValue', name);
-      setIsError(false);
-      setIsLoading(true);
-      const { results } = await RickAndMortyApi.getCharactersByName(name);
-      setCharacters(results);
-    } catch (e) {
-      setIsError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
-    <div className={styles.pageWrapper}>
-      <SearchField
-        onClick={() => fetchByName(searchFieldValue)}
-        value={searchFieldValue}
-        setValue={setSearchFieldValue}
-      />
-      {!isError ? (
-        <Cards characters={characters} />
-      ) : (
-        <div>Characters with such name were not found</div>
-      )}
-      {isLoading && createPortal(<Loader />, document.body)}
-    </div>
+    <>
+      <div className={styles.pageWrapper}>
+        <SearchField onSubmit={load} />
+        <Cards characters={data?.results} isError={isError} />
+      </div>
+      <Portal condition={isFetching}>
+        <Loader />
+      </Portal>
+    </>
   );
 };
 

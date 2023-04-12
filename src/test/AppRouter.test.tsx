@@ -1,8 +1,8 @@
-import { TestId } from 'enum/TestId';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import AppRouter from 'routes/AppRouter';
 import { act } from 'react-dom/test-utils';
+import { TestId } from 'enum/TestId';
+import AppRouter from 'routes/AppRouter';
 
 describe('AppRouter', () => {
   it('full app rendering/navigating', () => {

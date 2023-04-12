@@ -1,11 +1,10 @@
 import { render, screen } from '@testing-library/react';
-
-import Header from 'layout/Header/Header';
-import { MemoryRouter } from 'react-router-dom';
-import { PagesNames } from 'enum/PagesNames';
-import { TestId } from 'enum/TestId';
 import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
+import Header from 'layout/Header';
+import { PagesNames } from 'enum/PagesNames';
+import { TestId } from 'enum/TestId';
 
 describe('Header', () => {
   it('should render header', () => {

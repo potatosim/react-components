@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import CardModal from 'components/CardModal/CardModal';
-import { TestId } from 'enum/TestId';
 import axios, { AxiosResponse } from 'axios';
 import { act } from 'react-dom/test-utils';
+import CardModal from 'components/CardModal';
+import { TestId } from 'enum/TestId';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;

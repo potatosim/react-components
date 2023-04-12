@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import Footer from 'layout/Footer/Footer';
+import Footer from 'layout/Footer';
 import { TestId } from 'enum/TestId';
 
 describe('Footer', () => {

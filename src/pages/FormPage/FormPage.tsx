@@ -1,9 +1,10 @@
-import Form from 'components/Form/Form';
-import FormCards from 'components/Cards/FormCards';
 import { useState } from 'react';
-import { IFormCard } from 'types/IFormCard';
-import styles from './FormPage.module.scss';
 import { TestId } from 'enum/TestId';
+import { IFormCard } from 'components/FormCardItem';
+import Form from 'components/Form';
+import FormCards from 'components/FormCards/FormCards';
+
+import styles from './FormPage.module.scss';
 
 const FormPage = () => {
   const [cards, setCards] = useState<IFormCard[]>([]);

@@ -1,8 +1,7 @@
-import FormCardItem from 'components/FormCardItem/FormCardItem';
 import { FC } from 'react';
-import { IFormCard } from 'types/IFormCard';
 import { uid } from 'uid';
-import styles from './Cards.module.scss';
+import FormCardItem, { IFormCard } from 'components/FormCardItem';
+import CardWrapper from 'components/CardWrapper';
 
 interface FormCardsProps {
   cards: IFormCard[];
@@ -13,7 +12,7 @@ const FormCards: FC<FormCardsProps> = ({ cards }) => {
     return null;
   }
   return (
-    <div className={styles.cardsWrapper}>
+    <CardWrapper>
       {cards.map((card) => (
         <FormCardItem
           name={card.name}
@@ -24,7 +23,7 @@ const FormCards: FC<FormCardsProps> = ({ cards }) => {
           key={uid()}
         />
       ))}
-    </div>
+    </CardWrapper>
   );
 };
 

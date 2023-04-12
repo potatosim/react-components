@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
-import CardItem from 'components/CardItem/CardItem';
 import { TestId } from 'enum/TestId';
+import CardItem from 'components/CardItem';
 
 describe('CardItem', () => {
   const onClick = jest.fn();

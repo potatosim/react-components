@@ -1,4 +1,5 @@
 import { TestId } from 'enum/TestId';
+
 import styles from './AboutPage.module.scss';
 
 const AboutPage = () => {

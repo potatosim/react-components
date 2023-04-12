@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { TestId } from 'enum/TestId';
-import FormPage from 'pages/FormPage/FormPage';
 import { act } from 'react-dom/test-utils';
 import { MemoryRouter } from 'react-router-dom';
+import { TestId } from 'enum/TestId';
+import FormPage from 'pages/FormPage';
 
 describe('FormPage', () => {
   beforeEach(() => {

@@ -1,5 +1,6 @@
-import { AppRoutes } from 'enum/AppRoutes';
 import { useNavigate } from 'react-router-dom';
+import { AppRoutes } from 'enum/AppRoutes';
+
 import styles from './NotFoundPage.module.scss';
 
 const NotFoundPage = () => {
