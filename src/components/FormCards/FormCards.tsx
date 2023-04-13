@@ -1,19 +1,18 @@
 import { FC } from 'react';
 import { uid } from 'uid';
-import FormCardItem, { IFormCard } from 'components/FormCardItem';
+import FormCardItem from 'components/FormCardItem';
 import CardWrapper from 'components/CardWrapper';
+import { useAppSelector } from 'hooks/reduxHooks';
 
-interface FormCardsProps {
-  cards: IFormCard[];
-}
+const FormCards: FC = () => {
+  const { formCards } = useAppSelector((state) => state.formCards);
 
-const FormCards: FC<FormCardsProps> = ({ cards }) => {
-  if (!cards.length) {
+  if (!formCards.length) {
     return null;
   }
   return (
     <CardWrapper>
-      {cards.map((card) => (
+      {formCards.map((card) => (
         <FormCardItem
           name={card.name}
           birthday={card.birthday}

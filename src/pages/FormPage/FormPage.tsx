@@ -1,21 +1,23 @@
-import { useState } from 'react';
+import { useAppDispatch } from 'hooks/reduxHooks';
+import { addNewCard } from 'handlers/formSlice';
 import { TestId } from 'enum/TestId';
 import { IFormCard } from 'components/FormCardItem';
 import Form from 'components/Form';
-import FormCards from 'components/FormCards/FormCards';
+import FormCards from 'components/FormCards';
 
 import styles from './FormPage.module.scss';
 
 const FormPage = () => {
-  const [cards, setCards] = useState<IFormCard[]>([]);
+  const dispatch = useAppDispatch();
 
   const handleAddCard = (card: IFormCard) => {
-    setCards([...cards, card]);
+    dispatch(addNewCard(card));
   };
+
   return (
     <div data-testid={TestId.FormPageWrapper} className={styles.pageWrapper}>
       <Form addCard={handleAddCard} />
-      <FormCards cards={cards} />
+      <FormCards />
     </div>
   );
 };
