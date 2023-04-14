@@ -24,7 +24,7 @@ const Cards: FC<CardListProps> = ({ characters, isError }) => {
   }
 
   return (
-    <CardWrapper data-testid={TestId.CardItem}>
+    <CardWrapper data-testid={TestId.CardList}>
       {characters.map((item) => (
         <CardItem onClick={() => setCharacterId(item.id)} character={item} key={uid()} />
       ))}

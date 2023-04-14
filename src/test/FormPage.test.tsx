@@ -4,6 +4,8 @@ import { act } from 'react-dom/test-utils';
 import { MemoryRouter } from 'react-router-dom';
 import { TestId } from 'enum/TestId';
 import FormPage from 'pages/FormPage';
+import { Provider } from 'react-redux';
+import { store } from 'store/store';
 
 describe('FormPage', () => {
   beforeEach(() => {
@@ -16,9 +18,11 @@ describe('FormPage', () => {
 
   it('should render FormPage', () => {
     render(
-      <MemoryRouter>
-        <FormPage />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <FormPage />
+        </MemoryRouter>
+      </Provider>,
     );
     const formButton = screen.getByTestId(TestId.FormBtn);
     const formPageWrapper = screen.getByTestId(TestId.FormPageWrapper);
@@ -27,9 +31,11 @@ describe('FormPage', () => {
 
   it('should add form-cards to FormPage', async () => {
     render(
-      <MemoryRouter>
-        <FormPage />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <FormPage />
+        </MemoryRouter>
+      </Provider>,
     );
     const textInput = screen.getByTestId(TestId.FormTextInput);
     const dateInput = screen.getByTestId(TestId.FormDateInput);
