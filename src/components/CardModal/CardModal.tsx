@@ -1,10 +1,8 @@
-import { FC, useEffect, useState } from 'react';
-import CharacterItem from 'types/CharacterItem';
+import { FC } from 'react';
 import Modal from 'components/Modal/Modal';
-
-import RickAndMortyApi from 'api/RickAndMortyApi';
 import Loader from 'components/Loader/Loader';
 import { TestId } from 'enum/TestId';
+import { useGetCharacterQuery } from 'services/charactersApi';
 
 interface CardModalProps {
   onClose: () => void;
@@ -12,16 +10,7 @@ interface CardModalProps {
 }
 
 const CardModal: FC<CardModalProps> = ({ onClose, characterId }) => {
-  const [character, setCharacter] = useState<CharacterItem | null>(null);
-
-  const fetchById = async () => {
-    const data = await RickAndMortyApi.getCharacter(characterId);
-    setCharacter(data);
-  };
-
-  useEffect(() => {
-    fetchById();
-  }, []);
+  const { data: character } = useGetCharacterQuery(characterId);
 
   if (!character) {
     return <Loader />;

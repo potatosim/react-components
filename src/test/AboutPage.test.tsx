@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import { TestId } from 'enum/TestId';
-import AboutPage from 'pages/AboutPage/AboutPage';
 import { MemoryRouter } from 'react-router-dom';
+import { TestId } from 'enum/TestId';
+import AboutPage from 'pages/AboutPage';
 
 describe('AboutPage', () => {
   it('should render AboutPage', () => {

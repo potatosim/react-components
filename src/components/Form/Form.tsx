@@ -1,17 +1,18 @@
-import CheckBoxInput from 'components/CheckBoxInput/CheckBoxInput';
-import DateInput from 'components/DateInput/DateInput';
-import ErrorMessageWrapper from 'components/ErrorMessageWrapper/ErrorMessageWrapper';
-import FileInput from 'components/FileInput/FileInput';
-import TextInput from 'components/InputText/TextInput';
-import Modal from 'components/Modal/Modal';
-import RadioInput from 'components/RadioInput/RadioInput';
-import Select from 'components/Select/Select';
-import { TestId } from 'enum/TestId';
 import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { IFormCard } from 'types/IFormCard';
+import CheckBoxInput from 'components/CheckBoxInput';
+import DateInput from 'components/DateInput';
+import ErrorMessageWrapper from 'components/ErrorMessageWrapper';
+import FileInput from 'components/FileInput';
+import TextInput from 'components/InputText';
+import Modal from 'components/Modal';
+import RadioInput from 'components/RadioInput';
+import Select from 'components/Select';
+import { TestId } from 'enum/TestId';
+import { IFormCard } from 'components/FormCardItem';
+import Portal from 'components/Portal';
+
 import styles from './Form.module.scss';
-import { createPortal } from 'react-dom';
 
 interface IFormProps {
   addCard: (card: IFormCard) => void;
@@ -136,13 +137,11 @@ const Form: FC<IFormProps> = ({ addCard }) => {
           Submit
         </button>
       </form>
-      {!!isModalOpen &&
-        createPortal(
-          <Modal closeModal={handleClose} closeIcon={false}>
-            <h2 data-testid={TestId.Modal}>Your data were successfully submitted</h2>
-          </Modal>,
-          document.body,
-        )}
+      <Portal condition={!!isModalOpen}>
+        <Modal closeModal={handleClose} closeIcon={false}>
+          <h2 data-testid={TestId.Modal}>Your data were successfully submitted</h2>
+        </Modal>
+      </Portal>
     </>
   );
 };

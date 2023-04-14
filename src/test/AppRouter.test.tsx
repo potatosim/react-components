@@ -1,16 +1,20 @@
-import { TestId } from 'enum/TestId';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import AppRouter from 'routes/AppRouter';
 import { act } from 'react-dom/test-utils';
+import { TestId } from 'enum/TestId';
+import AppRouter from 'routes/AppRouter';
+import { Provider } from 'react-redux';
+import { store } from 'store/store';
 
 describe('AppRouter', () => {
   it('full app rendering/navigating', () => {
     act(() => {
       render(
-        <MemoryRouter>
-          <AppRouter />
-        </MemoryRouter>,
+        <Provider store={store}>
+          <MemoryRouter>
+            <AppRouter />
+          </MemoryRouter>
+        </Provider>,
       );
     });
     expect(screen.getByTestId(TestId.SearchField)).toBeInTheDocument();

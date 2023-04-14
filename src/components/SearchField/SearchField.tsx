@@ -1,17 +1,25 @@
 import { ChangeEvent, FC } from 'react';
-
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
+import { setSearchValue } from 'handlers/searchSlice';
 import { TestId } from 'enum/TestId';
+
 import styles from './SearchField.module.scss';
 
 interface SearchFieldProps {
-  value: string;
-  setValue: (value: string) => void;
-  onClick: () => Promise<void>;
+  onSubmit: (value: string) => void;
 }
 
-const SearchField: FC<SearchFieldProps> = ({ setValue, value, onClick }) => {
+const SearchField: FC<SearchFieldProps> = ({ onSubmit }) => {
+  const { searchValue } = useAppSelector((state) => state.search);
+
+  const dispatch = useAppDispatch();
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
+    dispatch(setSearchValue(event.target.value));
+  };
+
+  const handleSubmit = () => {
+    onSubmit(searchValue);
   };
 
   return (
@@ -19,18 +27,18 @@ const SearchField: FC<SearchFieldProps> = ({ setValue, value, onClick }) => {
       <input
         className={styles.input}
         placeholder="Enter character name"
-        value={value}
+        value={searchValue}
         onChange={handleChange}
         onKeyUp={(e) => {
           if (e.key === 'Enter') {
-            onClick();
+            handleSubmit();
           }
         }}
         data-testid={TestId.SearchField}
       />
       <button
         data-testid={TestId.SearchFieldBtn}
-        onClick={onClick}
+        onClick={handleSubmit}
         title="Search"
         className={styles.button}
       />

@@ -1,4 +1,5 @@
 import { TestId } from 'enum/TestId';
+
 import styles from './Footer.module.scss';
 
 const Footer = () => {

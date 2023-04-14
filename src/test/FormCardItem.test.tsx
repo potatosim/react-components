@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import FormCardItem from 'components/FormCardItem/FormCardItem';
+import FormCardItem from 'components/FormCardItem';
 
 import { TestId } from 'enum/TestId';
 
 describe('FormCardItem', () => {
   const mockFormCardData = {
     name: 'Anna',
-    birthday: '11.11.2011',
+    birthday: '2011-11-11',
     selected: 'Belarus',
     checkbox: true,
     radio: 'Female',

@@ -1,5 +1,6 @@
-import { TestId } from 'enum/TestId';
 import React from 'react';
+import { TestId } from 'enum/TestId';
+
 import styles from './TextInput.module.scss';
 
 interface ITextInputProps

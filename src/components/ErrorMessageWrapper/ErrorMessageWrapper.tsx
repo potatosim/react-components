@@ -1,5 +1,6 @@
-import { TestId } from 'enum/TestId';
 import React, { FC } from 'react';
+import { TestId } from 'enum/TestId';
+
 import styles from './ErrorMessageWrapper.module.scss';
 
 interface IErrorMessageWrapperProps {

@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Modal from 'components/Modal/Modal';
-import { TestId } from 'enum/TestId';
 import { act } from 'react-dom/test-utils';
+import Modal from 'components/Modal';
+import { TestId } from 'enum/TestId';
 
 describe('Modal', () => {
   it('not close Modal', async () => {

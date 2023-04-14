@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Form from 'components/Form/Form';
-import { TestId } from 'enum/TestId';
 import { act } from 'react-dom/test-utils';
+import Form from 'components/Form';
+import { TestId } from 'enum/TestId';
 
 describe('Form', () => {
   beforeEach(() => {

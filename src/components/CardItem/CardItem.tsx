@@ -1,7 +1,8 @@
-import { TestId } from 'enum/TestId';
-import { FC } from 'react';
-import styles from './CardItem.module.scss';
+import React, { FC } from 'react';
 import CharacterItem from 'types/CharacterItem';
+import { TestId } from 'enum/TestId';
+
+import styles from './CardItem.module.scss';
 
 interface CardItemProps {
   character: CharacterItem;
@@ -19,4 +20,4 @@ const CardItem: FC<CardItemProps> = ({ character, onClick }) => {
   );
 };
 
-export default CardItem;
+export default React.memo(CardItem);

@@ -1,7 +1,15 @@
-import { TestId } from 'enum/TestId';
 import { FC } from 'react';
-import { IFormCard } from 'types/IFormCard';
+import { TestId } from 'enum/TestId';
+
 import styles from './FormCardItem.module.scss';
+
+export interface IFormCard {
+  name: string;
+  birthday: string;
+  selected: string;
+  radio: string;
+  image: string;
+}
 
 const FormCardItem: FC<IFormCard> = ({ birthday, image, name, radio, selected }) => {
   return (

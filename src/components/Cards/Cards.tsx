@@ -1,36 +1,38 @@
-import { FC, useState } from 'react';
-
-import CardItem from 'components/CardItem/CardItem';
-import { TestId } from 'enum/TestId';
-import styles from './Cards.module.scss';
+import React, { FC, useState } from 'react';
 import { uid } from 'uid';
 import CharacterItem from 'types/CharacterItem';
-import { createPortal } from 'react-dom';
-import CardModal from 'components/CardModal/CardModal';
+import { TestId } from 'enum/TestId';
+import CardItem from 'components/CardItem';
+import CardModal from 'components/CardModal';
+import CardWrapper from 'components/CardWrapper';
+import Portal from 'components/Portal';
 
-interface CadrsProps {
-  characters: CharacterItem[];
+interface CardListProps {
+  characters?: CharacterItem[];
+  isError: boolean;
 }
 
-const Cards: FC<CadrsProps> = ({ characters }) => {
+const Cards: FC<CardListProps> = ({ characters, isError }) => {
   const [characterId, setCharacterId] = useState<number | null>(null);
 
   const handleCloseModal = () => {
     setCharacterId(null);
   };
 
+  if (isError || !characters) {
+    return <div>No characters were found</div>;
+  }
+
   return (
-    <div data-testid={TestId.CardList} className={styles.cardsWrapper}>
-      {characters.map((item) => {
-        return <CardItem onClick={() => setCharacterId(item.id)} character={item} key={uid()} />;
-      })}
-      {!!characterId &&
-        createPortal(
-          <CardModal characterId={characterId} onClose={handleCloseModal} />,
-          document.body,
-        )}
-    </div>
+    <CardWrapper data-testid={TestId.CardList}>
+      {characters.map((item) => (
+        <CardItem onClick={() => setCharacterId(item.id)} character={item} key={uid()} />
+      ))}
+      <Portal condition={!!characterId}>
+        <CardModal characterId={characterId!} onClose={handleCloseModal} />
+      </Portal>
+    </CardWrapper>
   );
 };
 
-export default Cards;
+export default React.memo(Cards);

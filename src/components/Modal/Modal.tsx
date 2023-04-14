@@ -1,7 +1,8 @@
-import { TestId } from 'enum/TestId';
 import React, { FC, PropsWithChildren } from 'react';
-import styles from './Modal.module.scss';
+import { TestId } from 'enum/TestId';
 import { CloseIcon } from 'static/icons';
+
+import styles from './Modal.module.scss';
 
 interface IModalProps extends PropsWithChildren {
   closeModal: () => void;

@@ -1,34 +1,46 @@
 import { render, screen } from '@testing-library/react';
-import CardModal from 'components/CardModal/CardModal';
-import { TestId } from 'enum/TestId';
-import axios, { AxiosResponse } from 'axios';
 import { act } from 'react-dom/test-utils';
+import CardModal from 'components/CardModal';
+import { TestId } from 'enum/TestId';
+import { setupServer } from 'msw/lib/node';
+import { rest } from 'msw';
+import { Provider } from 'react-redux';
+import { store } from 'store/store';
 
-jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+const response = {
+  name: 'Hanna',
+  species: 'Human',
+  gender: 'Unknown',
+  status: 'Awake and alive',
+  image:
+    'https://avatars.mds.yandex.net/i?id=6a5252daff56ea0d87522bc0ee6b2257-4429068-images-thumbs&n=13',
+  id: 1,
+  origin: { name: 'HZ' },
+  location: { name: 'Planet' },
+};
+
+const handlers = [
+  rest.get('https://rickandmortyapi.com/api/character/1', (_req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(response));
+  }),
+];
+
+const server = setupServer(...handlers);
 
 describe('CardModal', () => {
-  const response: Partial<AxiosResponse> = {
-    data: {
-      name: 'Hanna',
-      species: 'Human',
-      gender: 'Unknown',
-      status: 'Awake and alive',
-      image:
-        'https://avatars.mds.yandex.net/i?id=6a5252daff56ea0d87522bc0ee6b2257-4429068-images-thumbs&n=13',
-      id: 1,
-      origin: { name: 'HZ' },
-      location: { name: 'Planet' },
-    },
-  };
+  beforeAll(() => server.listen());
 
-  beforeEach(() => {
-    mockedAxios.get.mockResolvedValue(response);
-  });
+  afterEach(() => server.resetHandlers());
+
+  afterAll(() => server.close());
 
   it('should render CardModal', async () => {
     await act(async () => {
-      render(<CardModal onClose={() => {}} characterId={1} />);
+      render(
+        <Provider store={store}>
+          <CardModal onClose={() => {}} characterId={1} />
+        </Provider>,
+      );
     });
 
     const name = await screen.findByTestId(TestId.ModalName);
@@ -40,10 +52,22 @@ describe('CardModal', () => {
 
   it('should get a character', async () => {
     await act(async () => {
-      render(<CardModal onClose={() => {}} characterId={response.data.id} />);
+      render(
+        <Provider store={store}>
+          <CardModal onClose={() => {}} characterId={response.id} />
+        </Provider>,
+      );
     });
 
     const name = await screen.findByTestId(TestId.ModalName);
     expect(name).toBeInTheDocument();
+  });
+
+  it('Should display an error when the request fail', async () => {
+    server.use(
+      rest.get(`https://rickandmortyapi.com/api/character/${response.id}`, (_req, res, ctx) => {
+        return res(ctx.status(500), ctx.json('an error has occurred'));
+      }),
+    );
   });
 });

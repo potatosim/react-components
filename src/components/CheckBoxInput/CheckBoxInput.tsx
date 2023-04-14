@@ -1,5 +1,6 @@
-import { TestId } from 'enum/TestId';
 import React from 'react';
+import { TestId } from 'enum/TestId';
+
 import styles from './CheckBoxInput.module.scss';
 
 const CheckBoxInput = React.forwardRef<

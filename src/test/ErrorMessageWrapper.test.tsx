@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import ErrorMessageWrapper from 'components/ErrorMessageWrapper/ErrorMessageWrapper';
+import ErrorMessageWrapper from 'components/ErrorMessageWrapper';
 import { TestId } from 'enum/TestId';
 
 describe('Error Message', () => {

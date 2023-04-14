@@ -1,5 +1,6 @@
-import { TestId } from 'enum/TestId';
 import React from 'react';
+import { TestId } from 'enum/TestId';
+
 import styles from './Select.module.scss';
 
 const Select = React.forwardRef<
