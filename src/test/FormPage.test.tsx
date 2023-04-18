@@ -6,14 +6,15 @@ import { TestId } from 'enum/TestId';
 import FormPage from 'pages/FormPage';
 import { Provider } from 'react-redux';
 import { store } from 'store/store';
+import { vi } from 'vitest';
 
 describe('FormPage', () => {
   beforeEach(() => {
-    URL.createObjectURL = jest.fn();
+    URL.createObjectURL = vi.fn();
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render FormPage', () => {

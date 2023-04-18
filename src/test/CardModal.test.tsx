@@ -2,10 +2,11 @@ import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import CardModal from 'components/CardModal';
 import { TestId } from 'enum/TestId';
-import { setupServer } from 'msw/lib/node';
 import { rest } from 'msw';
 import { Provider } from 'react-redux';
 import { store } from 'store/store';
+import { setupServer } from 'msw/node';
+import 'cross-fetch/polyfill';
 
 const response = {
   name: 'Hanna',
@@ -38,7 +39,7 @@ describe('CardModal', () => {
     await act(async () => {
       render(
         <Provider store={store}>
-          <CardModal onClose={() => {}} characterId={1} />
+          <CardModal onClose={() => {}} characterId={response.id} />
         </Provider>,
       );
     });
@@ -46,8 +47,8 @@ describe('CardModal', () => {
     const name = await screen.findByTestId(TestId.ModalName);
     const gender = await screen.findByTestId(TestId.ModalGender);
 
-    expect(name).toBeInTheDocument();
-    expect(gender).toBeInTheDocument();
+    expect(name).toHaveTextContent(response.name);
+    expect(gender).toHaveTextContent(response.gender);
   });
 
   it('should get a character', async () => {

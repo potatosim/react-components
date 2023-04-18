@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { store } from 'store/store';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
+import 'cross-fetch/polyfill';
 
 const SEARCH_WRONG_VALUE = 'ssssss';
 

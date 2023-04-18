@@ -2,9 +2,10 @@ import { render, screen } from '@testing-library/react';
 
 import { TestId } from 'enum/TestId';
 import CardItem from 'components/CardItem';
+import { vi } from 'vitest';
 
 describe('CardItem', () => {
-  const onClick = jest.fn();
+  const onClick = vi.fn();
 
   const mockCardData = {
     name: 'Hanna',
