@@ -6,7 +6,7 @@ import { rest } from 'msw';
 import { Provider } from 'react-redux';
 import { store } from 'store/store';
 import { setupServer } from 'msw/node';
-import 'cross-fetch/polyfill';
+// import 'cross-fetch/polyfill';
 
 const response = {
   name: 'Hanna',
