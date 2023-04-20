@@ -71,6 +71,7 @@
     "no-console": "warn",
     "quotes": ["error", "single"],
     "semi": ["warn", "always"],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "@typescript-eslint/naming-convention": [
       "error",
       {
