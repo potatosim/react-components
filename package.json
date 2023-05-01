@@ -65,7 +65,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts,.tsx || true",
     "cyopen": "cypress open",
-    "test:cypress": "start-server-and-test http://localhost:3000 cyopen"
+    "test:cypress": "start-server-and-test http://localhost:3000 cyopen",
+    "coverage": "nyc report --reporter=text-summary"
   },
   "eslintConfig": {
     "extends": [
