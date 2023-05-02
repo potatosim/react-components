@@ -3,17 +3,18 @@ import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import Form from 'components/Form';
 import { TestId } from 'enum/TestId';
+import { vi } from 'vitest';
 
 describe('Form', () => {
   beforeEach(() => {
-    URL.createObjectURL = jest.fn();
+    URL.createObjectURL = vi.fn();
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
   it('should change IsModalOpen', async () => {
-    const addCard = jest.fn();
+    const addCard = vi.fn();
     render(<Form addCard={addCard} />);
 
     const textInput = screen.getByTestId(TestId.FormTextInput);

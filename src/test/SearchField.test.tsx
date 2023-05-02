@@ -6,11 +6,12 @@ import SearchField from 'components/SearchField';
 import { TestId } from 'enum/TestId';
 import { Provider } from 'react-redux';
 import { store } from 'store/store';
+import { vi } from 'vitest';
 
 const SEARCH_FIELD_VALUE = 'some value';
 
 describe('SearchField', () => {
-  afterEach(() => jest.clearAllMocks());
+  afterEach(() => vi.clearAllMocks());
   it('should render input', () => {
     render(
       <Provider store={store}>
